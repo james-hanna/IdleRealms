@@ -6,22 +6,18 @@ public class SkillManager : MonoBehaviour
     [Header("Action Bar Skills (in priority order)")]
     public List<Skill> actionBarSkills;
     
-    // Dictionary to store when each skill was last used.
     private Dictionary<Skill, float> lastUsedTime = new Dictionary<Skill, float>();
     
     void Awake()
     {
-        // Initialize the cooldown timer for each skill.
+
         foreach (var skill in actionBarSkills)
         {
             lastUsedTime[skill] = -Mathf.Infinity;
         }
     }
     
-    /// <summary>
-    /// Iterates through the skills (by priority) and uses the first that is off cooldown and for which the enemy is in range.
-    /// (This method is kept for backwards compatibility but is not used in our revised CombatController.)
-    /// </summary>
+
     public void UsePrioritySkill(Enemy target)
     {
         foreach(var skill in actionBarSkills)
@@ -44,9 +40,7 @@ public class SkillManager : MonoBehaviour
         return Time.time - lastUsedTime[skill] >= skill.cooldown;
     }
     
-    /// <summary>
-    /// Attempts to use the given skill on the target if it is within range.
-    /// </summary>
+
     public void UseSkill(Skill skill, Enemy target)
     {
         if (target == null)
@@ -74,12 +68,7 @@ public class SkillManager : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// Returns a candidate skill for the target:
-    /// - If a skill is off cooldown and the enemy is in range, returns that immediately.
-    /// - If none are in range but at least one skill is off cooldown, returns the first one found.
-    /// - If no skills are off cooldown, returns null.
-    /// </summary>
+
     public Skill GetCandidateSkillForTarget(Enemy target)
     {
         Skill candidate = null;
@@ -93,7 +82,7 @@ public class SkillManager : MonoBehaviour
                 float distance = Vector2.Distance(transform.position, target.transform.position);
                 if (distance <= skill.range)
                 {
-                    // This ready skill can hit the target.
+
                     return skill;
                 }
             }

@@ -28,9 +28,6 @@ public class FloatingDamageText : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Sets the damage value to display.
-    /// </summary>
     public void Setup(string damageValue)
     {
         if (damageText != null)
@@ -41,13 +38,13 @@ public class FloatingDamageText : MonoBehaviour
 
     void Update()
     {
-        // Move the text upward using the RectTransform's anchoredPosition.
+
         if (rectTransform != null)
         {
             rectTransform.anchoredPosition += Vector2.up * moveSpeed * Time.deltaTime;
         }
 
-        // Increase elapsed time and fade out the text.
+
         elapsedTime += Time.deltaTime;
         if (damageText != null)
         {
@@ -55,7 +52,6 @@ public class FloatingDamageText : MonoBehaviour
             damageText.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
         }
 
-        // Destroy the text when the fade is complete.
         if (elapsedTime >= fadeDuration)
         {
             Destroy(gameObject);

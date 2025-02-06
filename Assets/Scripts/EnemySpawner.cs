@@ -28,7 +28,6 @@ IEnumerator Respawn()
             Quaternion spawnRotation = (spawnPoint != null) ? spawnPoint.rotation : transform.rotation;
             GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, spawnRotation);
 
-            // IMPORTANT: Assign this spawner reference to the newly spawned enemy.
             Enemy enemyScript = newEnemy.GetComponent<Enemy>();
             if (enemyScript != null)
             {

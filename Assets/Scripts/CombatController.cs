@@ -38,7 +38,7 @@ public class CombatController : MonoBehaviour
     
     void Update()
     {
-        // Toggle auto attack on/off with the T key.
+
         if (Input.GetKeyDown(KeyCode.T))
         {
             autoAttackEnabled = !autoAttackEnabled;
@@ -59,7 +59,6 @@ public class CombatController : MonoBehaviour
                     if (enemyComponent != null)
                     {
                         float distance = Vector2.Distance(transform.position, currentTarget.position);
-                        // Try to get a candidate skill (one that’s off cooldown).
                         Skill candidateSkill = skillManager.GetCandidateSkillForTarget(enemyComponent);
                         
                         if (candidateSkill != null)
@@ -67,12 +66,12 @@ public class CombatController : MonoBehaviour
                             // At least one skill is off cooldown.
                             if (distance > candidateSkill.range)
                             {
-                                // Move closer until the candidate skill can hit the enemy.
+                                // Move closer until the skill can hit the enemy.
                                 playerController.SetClickToMoveTarget(currentTarget.position);
                             }
                             else
                             {
-                                // Enemy is within candidate skill’s range, so use it.
+                                // Enemy is within skill’s range, so use it.
                                 skillManager.UseSkill(candidateSkill, enemyComponent);
                             }
                         }
@@ -95,10 +94,7 @@ public class CombatController : MonoBehaviour
             yield return new WaitForSeconds(autoAttackCheckInterval);
         }
     }
-    
-    /// <summary>
-    /// Finds the nearest enemy using a 2D circle overlap.
-    /// </summary>
+
     Transform FindNearestEnemy()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, enemyDetectionRadius, enemyLayer);
@@ -116,9 +112,7 @@ public class CombatController : MonoBehaviour
         return nearest;
     }
     
-    /// <summary>
-    /// Executes a basic auto attack on the enemy.
-    /// </summary>
+
     void AutoAttack(Enemy enemy)
     {
         if (Time.time - lastAutoAttackTime >= autoAttackCooldown)
@@ -129,9 +123,6 @@ public class CombatController : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// Optionally, allow external scripts to manually set the target.
-    /// </summary>
     public void SetTarget(Transform enemy)
     {
         currentTarget = enemy;

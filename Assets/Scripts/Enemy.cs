@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
         if (DamageTextSpawner.Instance != null)
         {
             // Add an offset so that the damage text appears above the enemy.
-            Vector3 offset = new Vector3(0, 1f, 0); // Adjust the Y offset as needed.
+            Vector3 offset = new Vector3(0, 1f, 0); 
             Vector3 spawnPos = transform.position + offset;
             DamageTextSpawner.Instance.ShowDamageText(spawnPos, damage);
         }
@@ -62,13 +62,12 @@ public class Enemy : MonoBehaviour
             Instantiate(coinPrefab, transform.position, Quaternion.identity);
         }
         
-        // Notify the spawner to respawn a new enemy if one is assigned.
+        // Notify the spawner to respawn a new enemy
         if (spawner != null)
         {
             spawner.OnEnemyDeath();
         }
         
-        // Destroy this enemy GameObject.
         Destroy(gameObject);
     }
     

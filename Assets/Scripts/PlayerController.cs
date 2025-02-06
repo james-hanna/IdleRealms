@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     public float moveSpeed = 5f;
 
-    // Cached components
     private Rigidbody2D rb;
     private PathfindingAgent pathfindingAgent;
     private Camera mainCamera;
@@ -47,20 +46,17 @@ public class PlayerController : MonoBehaviour
 
         if (isClickToMoveActive)
         {
-            // Check if we have reached the destination.
             if (pathfindingAgent.HasReachedDestination())
             {
                 isClickToMoveActive = false;
             }
             else
             {
-                // Let the pathfinding agent handle movement using Rigidbody2D.MovePosition.
                 pathfindingAgent.MoveTowards(targetPosition);
             }
         }
         else
         {
-            // Manual movement using keyboard input.
             Vector2 newPosition = rb.position + moveInput * moveSpeed * Time.fixedDeltaTime;
             rb.MovePosition(newPosition);
         }
@@ -68,12 +64,10 @@ public class PlayerController : MonoBehaviour
 
     void HandleInput()
     {
-        // Get keyboard input (WASD or arrow keys)
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         moveInput = new Vector2(horizontal, vertical).normalized;
         
-        // Set a new click-to-move target if the left mouse button is pressed.
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);

@@ -6,12 +6,11 @@ public class DamageTextSpawner : MonoBehaviour
     
     [Tooltip("Floating Damage Text prefab reference.")]
     public GameObject damageTextPrefab;
-    public Canvas uiCanvas; // Assign this in the Inspector (the Canvas you want the damage text to appear on)
+    public Canvas uiCanvas; 
 
     
     void Awake()
     {
-        // Simple singleton pattern so we can easily access this from anywhere.
         if (Instance == null)
         {
             Instance = this;
@@ -22,17 +21,13 @@ public class DamageTextSpawner : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// Instantiates a floating damage text at the given world position.
-    /// </summary>
+
 public void ShowDamageText(Vector3 worldPosition, int damage)
 {
     if (damageTextPrefab != null && uiCanvas != null)
     {
-        // Convert world position to screen position if your canvas is in Screen Space
         Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPosition);
         
-        // Instantiate as a child of the UI Canvas
         GameObject dmgTextInstance = Instantiate(damageTextPrefab, screenPos, Quaternion.identity, uiCanvas.transform);
         
         FloatingDamageText floatingText = dmgTextInstance.GetComponent<FloatingDamageText>();
