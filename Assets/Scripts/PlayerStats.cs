@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour
     public int level = 1;
     public int currentXP = 0;
     public int xpToNextLevel = 100;
+    public int money = 0;
     
     public int defense = 5;
     
@@ -30,6 +31,12 @@ public class PlayerStats : MonoBehaviour
             currentXP -= xpToNextLevel;
             LevelUp();
         }
+    }
+
+        public void AddMoney(int amount)
+    {
+        money += amount;
+        Debug.Log($"Player picked up {amount} coin(s). Total money: {money}");
     }
     
     void LevelUp()

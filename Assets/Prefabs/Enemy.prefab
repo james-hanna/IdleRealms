@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6749130340937173439}
   - component: {fileID: 1036197043230087688}
   - component: {fileID: 1684772124057236208}
-  m_Layer: 0
+  - component: {fileID: 4678415338995545310}
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4771043797280809266}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.32, y: -0.68, z: 0.008849416}
+  m_LocalPosition: {x: 2.43, y: -28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -150,3 +151,33 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   xpReward: 50
+  coinDropChance: 0.75
+  coinPrefab: {fileID: 3405153674084273044, guid: 5358056f4bd1260449e7e786efa9ccc9, type: 3}
+  spawner: {fileID: 0}
+--- !u!50 &4678415338995545310
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4771043797280809266}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

@@ -1,4 +1,0 @@
-repository "IdleRealms/IdleRealms@1375775609878@cloud"
-  path "/"
-    br "/main"
-    co "/main"

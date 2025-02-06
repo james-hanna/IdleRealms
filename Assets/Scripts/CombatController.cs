@@ -3,11 +3,24 @@ using System.Collections;
 
 public class CombatController : MonoBehaviour
 {
+    [Header("Auto Attack Settings")]
     public bool autoAttackEnabled = true;
     public float autoAttackCheckInterval = 0.5f;
-    public float attackRange = 2f;
+    
+    [Header("Enemy Detection Settings")]
+    [Tooltip("The radius in which to search for enemies.")]
+    public float enemyDetectionRadius = 10f;
     public LayerMask enemyLayer;
     
+    [Header("Melee (Auto Attack) Settings")]
+    [Tooltip("Range within which auto attacks can hit.")]
+    public float attackRange = 2f;
+    [Tooltip("Damage dealt by an auto attack.")]
+    public float autoAttackDamage = 10f;
+    [Tooltip("Cooldown between auto attacks.")]
+    public float autoAttackCooldown = 1f;
+    
+    private float lastAutoAttackTime = -Mathf.Infinity;
     private Transform currentTarget;
     private SkillManager skillManager;
     private PlayerController playerController;
@@ -22,62 +35,79 @@ public class CombatController : MonoBehaviour
     {
         StartCoroutine(AutoAttackRoutine());
     }
-
-    void Update()
-{
-    // Toggle auto attack on/off with the T key
-    if (Input.GetKeyDown(KeyCode.T))
-    {
-        autoAttackEnabled = !autoAttackEnabled;
-        Debug.Log("Auto Attack toggled: " + autoAttackEnabled);
-    }
-}
-
     
-IEnumerator AutoAttackRoutine()
-{
-    while (true)
+    void Update()
     {
-        if (autoAttackEnabled)
+        // Toggle auto attack on/off with the T key.
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            currentTarget = FindNearestEnemy();
-            
-            if (currentTarget != null)
+            autoAttackEnabled = !autoAttackEnabled;
+            Debug.Log("Auto Attack toggled: " + autoAttackEnabled);
+        }
+    }
+    
+    IEnumerator AutoAttackRoutine()
+    {
+        while (true)
+        {
+            if (autoAttackEnabled)
             {
-                float distance = Vector2.Distance(transform.position, currentTarget.position);
-                if (distance > attackRange)
+                currentTarget = FindNearestEnemy();
+                if (currentTarget != null)
                 {
-                    if (playerController != null)
+                    Enemy enemyComponent = currentTarget.GetComponent<Enemy>();
+                    if (enemyComponent != null)
                     {
-                        playerController.SetClickToMoveTarget(currentTarget.position);
-                    }
-                }
-                else
-                {
-                    if (skillManager != null)
-                    {
-                        Enemy enemyComponent = currentTarget.GetComponent<Enemy>();
-                        if (enemyComponent != null)
+                        float distance = Vector2.Distance(transform.position, currentTarget.position);
+                        // Try to get a candidate skill (one that’s off cooldown).
+                        Skill candidateSkill = skillManager.GetCandidateSkillForTarget(enemyComponent);
+                        
+                        if (candidateSkill != null)
                         {
-                            skillManager.UsePrioritySkill(enemyComponent);
+                            // At least one skill is off cooldown.
+                            if (distance > candidateSkill.range)
+                            {
+                                // Move closer until the candidate skill can hit the enemy.
+                                playerController.SetClickToMoveTarget(currentTarget.position);
+                            }
+                            else
+                            {
+                                // Enemy is within candidate skill’s range, so use it.
+                                skillManager.UseSkill(candidateSkill, enemyComponent);
+                            }
+                        }
+                        else
+                        {
+                            // No skills are off cooldown, so perform an auto attack.
+                            if (distance > attackRange)
+                            {
+                                // Move closer until within auto attack range.
+                                playerController.SetClickToMoveTarget(currentTarget.position);
+                            }
+                            else
+                            {
+                                AutoAttack(enemyComponent);
+                            }
                         }
                     }
                 }
             }
+            yield return new WaitForSeconds(autoAttackCheckInterval);
         }
-        yield return new WaitForSeconds(autoAttackCheckInterval);
     }
-}
-
+    
+    /// <summary>
+    /// Finds the nearest enemy using a 2D circle overlap.
+    /// </summary>
     Transform FindNearestEnemy()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 10f, enemyLayer);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, enemyDetectionRadius, enemyLayer);
         Transform nearest = null;
         float minDistance = Mathf.Infinity;
-        foreach(Collider2D hit in hits)
+        foreach (Collider2D hit in hits)
         {
             float dist = Vector2.Distance(transform.position, hit.transform.position);
-            if(dist < minDistance)
+            if (dist < minDistance)
             {
                 minDistance = dist;
                 nearest = hit.transform;
@@ -86,6 +116,22 @@ IEnumerator AutoAttackRoutine()
         return nearest;
     }
     
+    /// <summary>
+    /// Executes a basic auto attack on the enemy.
+    /// </summary>
+    void AutoAttack(Enemy enemy)
+    {
+        if (Time.time - lastAutoAttackTime >= autoAttackCooldown)
+        {
+            enemy.TakeDamage((int)autoAttackDamage);
+            lastAutoAttackTime = Time.time;
+            Debug.Log($"{gameObject.name} auto attacked {enemy.name} for {autoAttackDamage} damage.");
+        }
+    }
+    
+    /// <summary>
+    /// Optionally, allow external scripts to manually set the target.
+    /// </summary>
     public void SetTarget(Transform enemy)
     {
         currentTarget = enemy;

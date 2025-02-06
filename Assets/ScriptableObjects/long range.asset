@@ -15,6 +15,6 @@ MonoBehaviour:
   skillName: Long Range
   icon: {fileID: 5190678920378040908, guid: c7a8573bd6a14854aa29177e08e94224, type: 3}
   skillType: 0
-  cooldown: 5
-  range: 10
+  cooldown: 10
+  range: 20
   damage: 10
