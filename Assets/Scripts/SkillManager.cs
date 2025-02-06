@@ -10,17 +10,15 @@ public class SkillManager : MonoBehaviour
     
     void Awake()
     {
-
         foreach (var skill in actionBarSkills)
         {
             lastUsedTime[skill] = -Mathf.Infinity;
         }
     }
     
-
     public void UsePrioritySkill(Enemy target)
     {
-        foreach(var skill in actionBarSkills)
+        foreach (var skill in actionBarSkills)
         {
             if (CanUseSkill(skill))
             {
@@ -40,7 +38,6 @@ public class SkillManager : MonoBehaviour
         return Time.time - lastUsedTime[skill] >= skill.cooldown;
     }
     
-
     public void UseSkill(Skill skill, Enemy target)
     {
         if (target == null)
@@ -68,7 +65,6 @@ public class SkillManager : MonoBehaviour
         }
     }
     
-
     public Skill GetCandidateSkillForTarget(Enemy target)
     {
         Skill candidate = null;
@@ -82,11 +78,20 @@ public class SkillManager : MonoBehaviour
                 float distance = Vector2.Distance(transform.position, target.transform.position);
                 if (distance <= skill.range)
                 {
-
                     return skill;
                 }
             }
         }
         return candidate;
+    }
+    
+
+    public float GetLastUsedTime(Skill skill)
+    {
+        if (lastUsedTime.ContainsKey(skill))
+        {
+            return lastUsedTime[skill];
+        }
+        return -Mathf.Infinity;
     }
 }
