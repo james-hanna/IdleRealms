@@ -1,11 +1,10 @@
+// ItemData.cs
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item")]
-public class InventoryItem : ScriptableObject
+public class ItemData : ScriptableObject
 {
     public string itemName;
     public Sprite icon;
-    public bool isStackable = true;
-    public int maxStack = 99;
-    
+    // Add other properties (e.g., description, stats, etc.)
 }

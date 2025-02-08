@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e608acee2af3f0d4d8b41c33f5c7c81a, type: 3}
-  m_Name: logs
+  m_Script: {fileID: 11500000, guid: b750658271f6dfb4fa83cf4f18f19cad, type: 3}
+  m_Name: Purple_Coin
   m_EditorClassIdentifier: 
-  itemName: Log
-  icon: {fileID: 983782073919371371, guid: c28713b188f77614c9a6de6786d893cb, type: 3}
-  isStackable: 1
-  maxStack: 99
+  itemName: 
+  icon: {fileID: 0}

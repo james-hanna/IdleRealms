@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e37c9141fcc8597488897dbdfc343370, type: 3}
-  m_Name: short range
+  m_Script: {fileID: 11500000, guid: b750658271f6dfb4fa83cf4f18f19cad, type: 3}
+  m_Name: Blue_Coin
   m_EditorClassIdentifier: 
-  skillName: Short Ranged
-  icon: {fileID: 6414333335686709831, guid: 0e48e36b06f3e4c4fb4280b38f199052, type: 3}
-  skillType: 0
-  cooldown: 5
-  range: 5
-  damage: 25
+  itemName: 
+  icon: {fileID: 0}
