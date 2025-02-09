@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 // This script handles the player's movement using both keyboard input and click-to-move.
 // When you click somewhere, it uses the PathfindingAgent to move the player.
@@ -72,11 +73,11 @@ public class PlayerController : MonoBehaviour
     {
         // Get normalized keyboard input.
         float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+         float vertical = Input.GetAxisRaw("Vertical");
         moveInput = new Vector2(horizontal, vertical).normalized;
         
         // Check for mouse click to set a new destination.
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject() == false)
         {
             Vector2 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             SetClickToMoveTarget(mouseWorldPos);

@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 82a73cb2388c90b4ca9d173c2bde9d1b, type: 2}
-  quantity: 1
+  quantity: 5
 --- !u!1 &8992975436861456906
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8036113803174813366}
   - component: {fileID: 6034551652978683950}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

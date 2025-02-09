@@ -26,7 +26,6 @@ public class DamageTextSpawner : MonoBehaviour
     // Call this function to show damage text at a specific world position.
     public void ShowDamageText(Vector3 worldPosition, int damage)
     {
-        Debug.Log("ShowDamageText called");
         if (damageTextPrefab != null && uiCanvas != null)
         {
             // Convert the world position (where the enemy got smacked) to a screen position for the UI.

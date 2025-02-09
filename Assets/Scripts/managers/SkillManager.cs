@@ -35,7 +35,7 @@ public class SkillManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log("No available or in-range skill for target: " + target.name);
+        //Debug.Log("No available or in-range skill for target: " + target.name);
     }
     
     // Check if a skill is off cooldown and ready to use.
@@ -49,7 +49,7 @@ public class SkillManager : MonoBehaviour
     {
         if (target == null)
         {
-            Debug.Log("No target available for skill usage.");
+            //Debug.Log("No target available for skill usage.");
             return;
         }
         
@@ -64,12 +64,12 @@ public class SkillManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Target out of range for " + skill.skillName);
+                //Debug.Log("Target out of range for " + skill.skillName);
             }
         }
         else
         {
-            Debug.Log($"{skill.skillName} is still on cooldown.");
+            //Debug.Log($"{skill.skillName} is still on cooldown.");
         }
     }
     

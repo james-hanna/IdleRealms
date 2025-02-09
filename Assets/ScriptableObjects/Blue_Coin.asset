@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b750658271f6dfb4fa83cf4f18f19cad, type: 3}
   m_Name: Blue_Coin
   m_EditorClassIdentifier: 
-  itemName: 
-  icon: {fileID: 0}
+  itemName: Blue Coin
+  icon: {fileID: -5108589515939217110, guid: 437b3141bcfc61441a87b72f8a5594e1, type: 3}

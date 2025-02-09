@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b750658271f6dfb4fa83cf4f18f19cad, type: 3}
   m_Name: Purple_Coin
   m_EditorClassIdentifier: 
-  itemName: 
-  icon: {fileID: 0}
+  itemName: Purple Coin
+  icon: {fileID: 6164921974516433432, guid: 4e09d4356781eea41a138af8831ba80c, type: 3}

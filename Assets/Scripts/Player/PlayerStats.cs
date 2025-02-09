@@ -57,7 +57,7 @@ public class PlayerStats : MonoBehaviour
     {
         int effectiveDamage = Mathf.Max(0, damage - defense);
         currentHealth -= effectiveDamage;
-        Debug.Log("Player took " + effectiveDamage + " damage. Remaining health: " + currentHealth);
+        Debug.Log("Player's defense reduces damage to " + effectiveDamage + ". Remaining health: " + currentHealth);
         if(currentHealth <= 0)
         {
             Die();

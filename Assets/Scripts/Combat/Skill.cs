@@ -22,7 +22,7 @@ public class Skill : ScriptableObject
         if (target != null)
         {
             target.TakeDamage(damage);
-            Debug.Log($"{user.name} used {skillName} on {target.name} for {damage} damage.");
+            //Debug.Log($"{user.name} used {skillName} on {target.name} for {damage} damage.");
         }
     }
 }
